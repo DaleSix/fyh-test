@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 对应 Dao 接口 -->
+<mapper namespace="com.example.demo.dao.UserMapper">
+
+    <!-- 
+      这就是你需要修改的地方：
+      如果你加了 age 字段，你需要在这里加 <result column="age" property="age"/> 
+      并在 SQL 里加上 age
+    -->
+    <resultMap id="BaseResultMap" type="com.example.demo.model.po.UserPO">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="age" property="age" />
+        <result column="is_deleted" property="isDeleted" />
+    </resultMap>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT id, username, password, age, is_deleted
+        FROM users
+        WHERE id = #{id}
+    </select>
+
+</mapper>
